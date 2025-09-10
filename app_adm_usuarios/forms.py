@@ -1,4 +1,3 @@
-# usuarios/forms.py
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from .models import ServidorUser
@@ -26,7 +25,6 @@ class ServidorUserCreationForm(forms.ModelForm):
             user.save()
         return user
 
-# usuarios/forms.py
 class ServidorUserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField(label="Senha")
 

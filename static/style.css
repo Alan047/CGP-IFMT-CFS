@@ -1,0 +1,21 @@
+
+
+.div-main {
+   
+    height: 100vh;
+    padding: 10px;
+}
+
+.div-main div {
+    padding: 5px;
+}
+
+ul {
+    text-decoration: none;
+    list-style: none;
+    padding: 0px;
+}
+
+h3 {
+    text-align: center;
+}

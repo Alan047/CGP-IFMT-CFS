@@ -28,7 +28,6 @@ class ServidorUser(AbstractBaseUser, PermissionsMixin):
     data_ent_exercicio = models.DateField(null=True, blank=True)
     estabilidade = models.BooleanField(default=False)
     ativo = models.BooleanField(default=True)
-
     
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -39,4 +38,4 @@ class ServidorUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['nome',]
 
     def __str__(self):
-        return str(self.matricula)
+        return f'{self.nome}({self.matricula})'

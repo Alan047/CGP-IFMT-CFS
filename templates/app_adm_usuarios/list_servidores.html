@@ -7,31 +7,21 @@
     <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Matricula</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Categoria</th>
+      <th scope="col">Ingresso</th>
     </tr>
   </thead>
   <tbody class="table-group-divider">
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+    {% for servidor in servidores %}
+      <tr>
+        <th scope="row">{{servidor.matricula}}</th>
+        <td>{{servidor.nome}}</td>
+        <td>{{servidor.categoria}}</td>
+        <td>{{servidor.data_ent_exercicio|date:'d/m/Y'}}</td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>John</td>
-      <td>Doe</td>
-      <td>@social</td>
-    </tr>
+    {% endfor %}
   </tbody>
 </table>
 {% endblock %}

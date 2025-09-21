@@ -1,3 +1,40 @@
 from django.shortcuts import render
+from datetime import date
 
-# Create your views here.
+from .models import Contratos
+from app_adm_usuarios.models import ServidorUser
+
+def home(request):
+    contratados = ServidorUser.objects.filter(categoria='CONTRATADO')
+
+    lista = []
+
+    for contratado in contratados:
+        aviso = False
+        contratos = contratado.contratos.all()
+        for contrato in contratos:            
+            if a_vencer(contrato.data_fim):
+                aviso = True
+                break
+        dados = {'usuario':contratado, 'aviso':aviso}            
+        lista.append(dados)
+    context = {
+        'contratados':lista,
+    }
+    return render(request, 'app_adm_temporarios/list_contratados.html', context)
+
+def list_contratos(request):
+    contratos = Contratos.objects.all()
+    context = {
+        'contratos':contratos,
+    }
+    return render(request, 'app_adm_temporarios/list_contratos.html', context)
+
+# Ultilitário
+
+def a_vencer(data_1, dias=30):
+    dias_restantes = (data_1 - date.today()).days
+    if dias_restantes < 30:
+        return True
+    else:
+        return False

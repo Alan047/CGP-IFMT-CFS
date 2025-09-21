@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link " aria-current="page" href="{% url 'index_temporarios' %}">Pf. Contratados</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{% url 'list_contratos' %}">Contratos/aditivos</a>
+  </li>
+</ul>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Colaborador</th>
+      <th scope="col">Observação</th>
+      <th scope="col">Início</th>
+      <th scope="col">Encerramento</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    {% for contrato in contratos %}
+      <tr>
+        <th scope="row">{{contrato.usuario}}</th>
+        <td>{{contrato.observacao}}</td>
+        <td>{{contrato.data_inicio|date:'d/m/Y'}}</td>
+        <td>{{contrato.data_fim|date:'d/m/Y'}}</td>
+        <td>{{contrato.ativo}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

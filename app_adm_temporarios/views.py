@@ -5,7 +5,7 @@ from .models import Contratos
 from app_adm_usuarios.models import ServidorUser
 
 def home(request):
-    contratados = ServidorUser.objects.filter(categoria='CONTRATADO')
+    contratados = ServidorUser.objects.filter(categoria='CONTRATADO').order_by('nome')
 
     lista = []
 
@@ -13,7 +13,7 @@ def home(request):
         aviso = False
         contratos = contratado.contratos.all()
         for contrato in contratos:            
-            if a_vencer(contrato.data_fim):
+            if a_vencer(contrato.data_fim) and contrato.ativo==True:
                 aviso = True
                 break
         dados = {'usuario':contratado, 'aviso':aviso}            
@@ -24,7 +24,7 @@ def home(request):
     return render(request, 'app_adm_temporarios/list_contratados.html', context)
 
 def list_contratos(request):
-    contratos = Contratos.objects.all()
+    contratos = Contratos.objects.all().order_by('usuario__nome', '-data_fim')
     context = {
         'contratos':contratos,
     }

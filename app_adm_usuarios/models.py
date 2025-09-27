@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from datetime import date
+from dateutil.relativedelta import relativedelta
 
 
 class ServidorUserManager(BaseUserManager):
@@ -33,6 +35,20 @@ class ServidorUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
 
     objects = ServidorUserManager()
+
+    def tempo_decorrido(self):
+        hoje = date.today()
+        tempo = relativedelta(hoje, self.data_ent_exercicio)
+
+        if tempo.years <= 1:
+            anos = '' if tempo.years < 1 else f'{tempo.years} ano,'
+        else:
+            anos = f'{tempo.years} anos,'
+        if tempo.months <= 1:
+            meses = '' if tempo.months < 1 else f'{tempo.months} mês,'
+        else:
+            meses = f'{tempo.months} meses,'
+        return f'{anos} {meses} {tempo.days} dia(s)'
 
     USERNAME_FIELD = 'matricula'   # <- login será pela matrícula
     REQUIRED_FIELDS = ['nome',]

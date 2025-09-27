@@ -1,3 +1,5 @@
+from datetime import date
+from dateutil.relativedelta import relativedelta
 from django.db import models
 from django.conf import settings
 
@@ -8,6 +10,9 @@ class Contratos(models.Model):
     data_fim = models.DateField()
     aviso = models.BooleanField(default=False)
     ativo = models.BooleanField(default=True)
+
+    def tempo(self):
+        pass
 
     def __str__(self):
         return f'Contrato:{self.usuario} - {self.observacao}'

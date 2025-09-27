@@ -4,7 +4,7 @@
 {% block content %}
 <ul class="nav nav-pills">
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="{% url 'index_temporarios' %}">Pf. Contratados</a>
+    <a class="nav-link active" aria-current="page" href="{% url 'index_temporarios' %}">Professores</a>
   </li>
   <li class="nav-item">
     <a class="nav-link " aria-current="page" href="{% url 'list_contratos' %}">Contratos/aditivos</a>
@@ -26,9 +26,10 @@
       <th scope="row">{{contratado.usuario.matricula}}</th>
       <td>{{contratado.usuario.nome}}</td>
       <td>{{contratado.usuario.data_ent_exercicio|date:'d/m/Y'}}</td>
+      <td>{{contratado.usuario.tempo_decorrido}}</td>
       <td>
         {% if contratado.aviso %}
-          <p class="m-0 alert-warning align-items-center">Vencendo</p>
+          <p class="m-0 alert-warning align-items-center"><span class="badge text-bg-warning">Warning</span></p>
         {% endif %}
       </td>
     </tr>

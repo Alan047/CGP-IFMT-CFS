@@ -4,7 +4,7 @@
 {% block content %}
 <ul class="nav nav-pills">
   <li class="nav-item">
-    <a class="nav-link " aria-current="page" href="{% url 'index_temporarios' %}">Pf. Contratados</a>
+    <a class="nav-link " aria-current="page" href="{% url 'index_temporarios' %}">Professores</a>
   </li>
   <li class="nav-item">
     <a class="nav-link active" aria-current="page" href="{% url 'list_contratos' %}">Contratos/aditivos</a>
@@ -17,7 +17,7 @@
       <th scope="col">Observação</th>
       <th scope="col">Início</th>
       <th scope="col">Encerramento</th>
-      <th scope="col">Status</th>
+      <th scope="col">Ativo</th>
     </tr>
   </thead>
   <tbody class="table-group-divider">
@@ -27,7 +27,12 @@
         <td>{{contrato.observacao}}</td>
         <td>{{contrato.data_inicio|date:'d/m/Y'}}</td>
         <td>{{contrato.data_fim|date:'d/m/Y'}}</td>
-        <td>{{contrato.ativo}}</td>
+        <td>
+          {% if contrato.ativo %}
+          <span class="badge text-bg-success">Sim</span></td>
+          {% else %}
+          <span class="badge text-bg-danger">Não</span></td>
+          {% endif %}
     </tr>
     {% endfor %}
   </tbody>

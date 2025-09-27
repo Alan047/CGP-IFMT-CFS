@@ -11,8 +11,10 @@ class Contratos(models.Model):
     aviso = models.BooleanField(default=False)
     ativo = models.BooleanField(default=True)
 
-    def tempo(self):
-        pass
 
+        
     def __str__(self):
         return f'Contrato:{self.usuario} - {self.observacao}'
+    
+class Estagio(models.Model):
+    pass

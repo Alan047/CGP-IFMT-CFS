@@ -24,11 +24,29 @@ def home(request):
     return render(request, 'app_adm_temporarios/list_contratados.html', context)
 
 def list_contratos(request):
-    contratos = Contratos.objects.all().order_by('usuario__nome', '-data_fim')
+    contratos = Contratos.objects.filter(usuario__categoria='CONTRATADO').order_by('usuario__nome', '-data_fim')
     context = {
         'contratos':contratos,
     }
     return render(request, 'app_adm_temporarios/list_contratos.html', context)
+
+def list_estagiarios(request):
+
+    estagiarios = Contratos.objects.filter(usuario__categoria='ESTAGIARIO').order_by('usuario__nome', 'data_fim')
+
+    lista = []
+
+    for estagio in estagiarios:
+        aviso = False
+        if a_vencer(data_1=estagio.data_fim) and estagio.ativo:
+            aviso = True
+        dado = {'estagio':estagio, 'aviso':aviso}
+        lista.append(dado)
+    context = {
+        'estagiarios':lista,
+    }
+    print(lista)
+    return render(request, 'app_adm_temporarios/list_estagiarios.html', context)
 
 # Ultilitário
 
@@ -38,3 +56,4 @@ def a_vencer(data_1, dias=30):
         return True
     else:
         return False
+    
